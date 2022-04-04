@@ -1,14 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../../../components/nectar_texts.dart';
-
 class SigInInInputField extends StatelessWidget {
   const SigInInInputField({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextField(
+      keyboardType: TextInputType.number,
       decoration: InputDecoration(
         prefixIcon: Image.asset("assets/icons/bd.png"),
         prefixText: '+880',
