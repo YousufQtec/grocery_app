@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grocery_app/screens/onboarding/onbording_screen.dart';
+import 'package:grocery_app/screens/sigin_in/sign_in_screen.dart';
 import 'package:grocery_app/screens/splash/splash_screen.dart';
 import 'package:grocery_app/size_config.dart';
 
@@ -18,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const OnboardingScreen(),
+      home: const SignInScreen(),
     );
   }
 }
