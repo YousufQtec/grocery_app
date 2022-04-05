@@ -1,20 +1,18 @@
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:grocery_app/components/nectar_common_button.dart';
+import 'package:grocery_app/constants.dart';
+import 'package:grocery_app/screens/select_location/cubit/area_select_cubit.dart';
+import 'package:grocery_app/screens/select_location/cubit/zone_select_cubit.dart';
 import 'package:grocery_app/size_config.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 class SelectLocationScreen extends StatelessWidget {
   const SelectLocationScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    //  List<String> _locations = ['Please choose a location', 'A', 'B', 'C', 'D']; // Option 1
-//  String _selectedLocation = 'Please choose a location'; // Option 1
-    List<String> _locations = ['A', 'B', 'C', 'D']; // Option 2
-    String _selectedLocation = "A"; // Option 2
-
     SizeConfig().init(context);
     return Scaffold(
       body: Container(
@@ -29,7 +27,9 @@ class SelectLocationScreen extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(height: 56,),
+            SizedBox(
+              height: getProportionateScreenHeight(35),
+            ),
             SizedBox(
               width: SizeConfig.screenWidth,
               child: Align(
@@ -37,18 +37,20 @@ class SelectLocationScreen extends StatelessWidget {
                 child: Material(
                   color: Colors.transparent,
                   child: IconButton(
-                    tooltip: "back",
+                      tooltip: "back",
                       onPressed: () {
-                        print("onPressed");
+                        //
                       },
                       icon: SvgPicture.asset("assets/icons/back_arrow.svg")),
                 ),
               ),
             ),
-            const SizedBox(height: 44,),
+            SizedBox(
+              height: getProportionateScreenHeight(20),
+            ),
             Image.asset("assets/images/location_pin.png"),
-            const SizedBox(
-              height: 40,
+            SizedBox(
+              height: getProportionateScreenHeight(25),
             ),
             Text(
               'Select Your Location',
@@ -57,8 +59,8 @@ class SelectLocationScreen extends StatelessWidget {
                   fontSize: 26,
                   fontWeight: FontWeight.w600),
             ),
-            const SizedBox(
-              height: 15,
+            SizedBox(
+              height: getProportionateScreenHeight(10),
             ),
             Text(
               'Switch on your location to stay in tune with what’s happening in your area',
@@ -68,7 +70,9 @@ class SelectLocationScreen extends StatelessWidget {
                   fontWeight: FontWeight.w600),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 90,),
+            SizedBox(
+              height: getProportionateScreenHeight(50),
+            ),
             SizedBox(
               width: SizeConfig.screenWidth,
               child: Text(
@@ -82,20 +86,64 @@ class SelectLocationScreen extends StatelessWidget {
             ),
             SizedBox(
               width: SizeConfig.screenWidth,
-              child: DropdownButton(
-                hint: Text('Please choose a location'), // Not necessary for Option 1
-                value: _selectedLocation,
-                onChanged: (newValue) {
-
-                },
-                items: _locations.map((location) {
-                  return DropdownMenuItem(
-                    child: new Text(location),
-                    value: location,
+              child: BlocBuilder<ZoneSelectCubit, String>(
+                builder: (context, state) {
+                  return DropdownButtonFormField(
+                    icon: SvgPicture.asset("assets/icons/arrow_down.svg"),
+                    hint: const Text('Please choose a location'),
+                    value: state,
+                    onChanged: (String? newValue) {
+                      context.read<ZoneSelectCubit>().zoneOnChanged(newValue!);
+                    },
+                    items: nectarZones.map((zone) {
+                      return DropdownMenuItem(
+                        child: Text(zone),
+                        value: zone,
+                      );
+                    }).toList(),
                   );
-                }).toList(),
+                },
               ),
             ),
+            SizedBox(
+              height: getProportionateScreenHeight(20),
+            ),
+            SizedBox(
+              width: SizeConfig.screenWidth,
+              child: Text(
+                'Your Area',
+                style: GoogleFonts.poppins(
+                    color: const Color(0xFF7C7C7C),
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600),
+                textAlign: TextAlign.left,
+              ),
+            ),
+            SizedBox(
+              width: SizeConfig.screenWidth,
+              child: BlocBuilder<AreaSelectCubit, String>(
+                builder: (context, state) {
+                  return DropdownButtonFormField(
+                    icon: SvgPicture.asset("assets/icons/arrow_down.svg"),
+                    hint: const Text('Please choose a location'),
+                    value: state,
+                    onChanged: (String? newValue) {
+                      context.read<AreaSelectCubit>().areaOnChanged(newValue!);
+                    },
+                    items: nectarArea.map((area) {
+                      return DropdownMenuItem(
+                        child: Text(area),
+                        value: area,
+                      );
+                    }).toList(),
+                  );
+                },
+              ),
+            ),
+            SizedBox(
+              height: getProportionateScreenHeight(30),
+            ),
+            NectarCommonButton(onPressed: () {}, btnName: 'Submit')
           ],
         ),
       ),
