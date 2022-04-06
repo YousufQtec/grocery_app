@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:grocery_app/screens/home/home_screen.dart';
 import 'package:grocery_app/screens/onboarding/onbording_screen.dart';
 import 'package:grocery_app/screens/select_location/cubit/area_select_cubit.dart';
 import 'package:grocery_app/screens/select_location/cubit/zone_select_cubit.dart';
@@ -23,13 +24,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MultiBlocProvider(
-        providers: [
-          BlocProvider(create: (context) => ZoneSelectCubit()),
-          BlocProvider(create: (context) => AreaSelectCubit()),
-        ],
-        child: const SelectLocationScreen(),
-      ),
+      home: const HomeScreen(),
     );
   }
 }
