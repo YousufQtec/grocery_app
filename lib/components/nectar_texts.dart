@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:grocery_app/constants.dart';
 
 class MediumText extends StatelessWidget {
   const MediumText({Key? key, required this.text, required this.color})
@@ -21,20 +22,21 @@ class MediumText extends StatelessWidget {
 }
 
 class SemiBoldText extends StatelessWidget {
-  const SemiBoldText({Key? key, required this.text, required this.color})
+  const SemiBoldText({Key? key, required this.text, this.color, this.fontSize})
       : super(key: key);
   final String text;
-  final Color color;
+  final Color? color;
+  final double? fontSize;
 
   @override
   Widget build(BuildContext context) {
     return Text(
       text,
       style: GoogleFonts.poppins(
-        color: color,
-        fontSize: 18,
+        color: color ?? nBlackColor,
+        fontSize: fontSize ?? 18,
         fontWeight: FontWeight.w600,
-        height: 1
+        height: 1.1
       ),
       textAlign: TextAlign.center,
     );

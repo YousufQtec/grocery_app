@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 //-------------------colors-----------------------
 
 const nectarPrimaryColor = Color(0xFF53B175);
+const nBlackColor = Color(0xFF181725);
 
 //-------------------Strings-----------------------
 List<String> nectarZones = ['Banasree', 'Uttra', 'Khilkhet', 'Nikunjo'];
