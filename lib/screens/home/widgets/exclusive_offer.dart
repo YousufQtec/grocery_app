@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:grocery_app/components/product_card.dart';
 import 'package:grocery_app/screens/home/widgets/section_header.dart';
 
 class ExclusiveOffer extends StatelessWidget {
@@ -8,7 +9,8 @@ class ExclusiveOffer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: const [
-        SectionHeader()
+        SectionHeader(),
+        ProductCard()
       ],
     );
   }
